@@ -35,6 +35,7 @@ var (
 
 // options
 type option struct {
+	dic     string
 	udic    string
 	sysdic  string
 	output  string
@@ -51,6 +52,7 @@ func newOption(w io.Writer, eh flag.ErrorHandling) (o *option) {
 		flagSet: flag.NewFlagSet(CommandName, eh),
 	}
 	// option settings
+	o.flagSet.StringVar(&o.dic, "dic", "", "dic")
 	o.flagSet.StringVar(&o.udic, "udic", "", "user dic")
 	o.flagSet.StringVar(&o.sysdic, "sysdic", "ipa", "system dic type (ipa|uni)")
 	o.flagSet.StringVar(&o.output, "output", "", "output file")
@@ -85,7 +87,13 @@ func OptionCheck(args []string) (err error) {
 // command main
 func command(opt *option) error {
 	var dic tokenizer.Dic
-	if opt.sysdic == "ipa" {
+	if opt.dic != "" {
+		var err error
+		dic, err = tokenizer.NewDic(opt.dic)
+		if err != nil {
+			return err
+		}
+	} else if opt.sysdic == "ipa" {
 		dic = tokenizer.SysDicIPA()
 	} else if opt.sysdic == "uni" {
 		dic = tokenizer.SysDicUni()
