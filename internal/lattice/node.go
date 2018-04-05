@@ -54,6 +54,7 @@ type node struct {
 	Right   int32
 	Weight  int32
 	Surface string
+	RuneLen int
 	Prev    *node
 }
 

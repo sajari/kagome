@@ -16,7 +16,6 @@ package tokenizer
 
 import (
 	"io"
-	"unicode/utf8"
 
 	"github.com/ikawaha/kagome/internal/dic"
 	"github.com/ikawaha/kagome/internal/lattice"
@@ -91,7 +90,7 @@ func (t Tokenizer) Analyze(input string, mode TokenizeMode) (tokens []Token) {
 			ID:      n.ID,
 			Class:   TokenClass(n.Class),
 			Start:   n.Start,
-			End:     n.Start + utf8.RuneCountInString(n.Surface),
+			End:     n.Start + n.RuneLen,
 			Surface: n.Surface,
 			dic:     t.dic,
 			udic:    t.udic,
@@ -137,7 +136,7 @@ func (t Tokenizer) AnalyzeGraph(input string, mode TokenizeMode, w io.Writer) (t
 			ID:      n.ID,
 			Class:   TokenClass(n.Class),
 			Start:   n.Start,
-			End:     n.Start + utf8.RuneCountInString(n.Surface),
+			End:     n.Start + n.RuneLen,
 			Surface: n.Surface,
 			dic:     t.dic,
 			udic:    t.udic,

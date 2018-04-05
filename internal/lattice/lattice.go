@@ -102,7 +102,8 @@ func (la *Lattice) addNode(pos, id, start int, class NodeClass, surface string) 
 	n.Left, n.Right, n.Weight = int32(m.LeftID), int32(m.RightID), int32(m.Weight)
 	n.Surface = surface
 	n.Prev = nil
-	p := pos + utf8.RuneCountInString(surface)
+	n.RuneLen = utf8.RuneCountInString(surface)
+	p := pos + n.RuneLen
 	la.list[p] = append(la.list[p], n)
 }
 
@@ -204,7 +205,7 @@ func kanjiOnly(s string) bool {
 }
 
 func additionalCost(n *node) int {
-	l := utf8.RuneCountInString(n.Surface)
+	l := n.RuneLen
 	if l > searchModeKanjiLength && kanjiOnly(n.Surface) {
 		return (l - searchModeKanjiLength) * searchModeKanjiPenalty
 	}
@@ -263,8 +264,8 @@ func (la *Lattice) Backward(m TokenizeMode) {
 			la.Output = append(la.Output, p)
 			continue
 		}
-		runeLen := utf8.RuneCountInString(p.Surface)
-		stack := make([]*node, 0, runeLen)
+
+		stack := make([]*node, 0, p.RuneLen)
 		i := 0
 		for _, r := range p.Surface {
 			n := nodePool.Get().(*node)
@@ -272,11 +273,12 @@ func (la *Lattice) Backward(m TokenizeMode) {
 			n.Start = p.Start + i
 			n.Class = DUMMY
 			n.Surface = string(r)
+			n.RuneLen = 1
 			stack = append(stack, n)
 			i++
 		}
 		for j, end := 0, len(stack); j < end; j++ {
-			la.Output = append(la.Output, stack[runeLen-1-j])
+			la.Output = append(la.Output, stack[p.RuneLen-1-j])
 		}
 	}
 }
