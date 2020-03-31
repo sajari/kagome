@@ -22,7 +22,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ikawaha/kagome/internal/dic"
+	"code.sajari.com/kagome/internal/dic"
 )
 
 // UserDic represents a user dictionary.
