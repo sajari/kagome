@@ -21,7 +21,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/ikawaha/kagome/internal/dic"
+	"code.sajari.com/kagome/internal/dic"
 )
 
 const (

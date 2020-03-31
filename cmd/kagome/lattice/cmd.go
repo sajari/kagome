@@ -22,7 +22,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ikawaha/kagome/tokenizer"
+	"code.sajari.com/kagome/tokenizer"
 )
 
 // subcommand property

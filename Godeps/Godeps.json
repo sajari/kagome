@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/ikawaha/kagome",
+	"ImportPath": "code.sajari.com/kagome",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79",
 	"Packages": [

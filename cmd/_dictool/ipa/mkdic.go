@@ -34,8 +34,8 @@ import (
 	"golang.org/x/text/encoding/japanese"
 	"golang.org/x/text/transform"
 
-	"github.com/ikawaha/kagome/cmd/_dictool/splitfile"
-	"github.com/ikawaha/kagome/internal/dic"
+	"code.sajari.com/kagome/cmd/_dictool/splitfile"
+	"code.sajari.com/kagome/internal/dic"
 )
 
 const (

@@ -17,8 +17,8 @@ package tokenizer
 import (
 	"io"
 
-	"github.com/ikawaha/kagome/internal/dic"
-	"github.com/ikawaha/kagome/internal/lattice"
+	"code.sajari.com/kagome/internal/dic"
+	"code.sajari.com/kagome/internal/lattice"
 )
 
 // TokenizeMode represents a mode of tokenize.
